@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    System.Globalization.CultureInfo pl = new System.Globalization.CultureInfo("pl-PL");
+    string color;
+    if ((double)ViewData["random"] > 0.5)
+        color = "red";
+    else
+        color = "white";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>@pl.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek), @DateTime.Now.ToString("dd MMMM yyyy")</p>
+    <p style = "background-color :@color"> @ViewData["random"] </p>
+</div>
