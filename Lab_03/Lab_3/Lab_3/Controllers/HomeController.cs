@@ -48,8 +48,8 @@ namespace Lab_3.Controllers
 
         public IActionResult Delete(int id)
         {
-            if (_phoneBook.GetContacts().Last().Id < (id-1))
-                return StatusCode(404);
+            if (_phoneBook.GetContacts().Last().Id <= (id-1))
+                return NotFound();
 
             _phoneBook.Remove(id);
             return RedirectToAction("Index");

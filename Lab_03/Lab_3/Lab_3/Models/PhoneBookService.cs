@@ -86,6 +86,13 @@
         public void Remove(int id)
         {
             contacts.RemoveAt(id-1);
+            foreach (Contact contact in contacts)
+            {
+                if (contact.Id > id - 1)
+                {
+                    contact.Id--;
+                }
+            }
         }
     }
 }

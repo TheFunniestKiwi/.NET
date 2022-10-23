@@ -1,0 +1,12 @@
+﻿@model int
+@for (int i = 0; i < 5; i++)
+{
+	if (i < Model)
+	{
+		<span title="@Model">&#x2605;</span>
+	}
+	else
+	{
+		<span title="@Model">&#x2606;</span>
+	}
+}
