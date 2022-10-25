@@ -2,4 +2,5 @@
 @model Lab_04.Pages.SingleModel
 @{
 }
+<h1>@Model.Label (prob: @((Model.Probability * 100).ToString("F0"))%)</h1>
 <img src="~/images/@Model.Image" class="img-fluid" />

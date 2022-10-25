@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,5 +9,22 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
+	<ItemGroup>
+	<PackageReference Include="Microsoft.ML" Version="1.7.1" />
+	<PackageReference Include="Microsoft.ML.ImageAnalytics"
+	                  Version="1.7.1" />
+	<PackageReference Include="Microsoft.ML.TensorFlow"
+	                  Version="1.7.1" />
+	<PackageReference Include="SciSharp.TensorFlow.Redist"
+			                  Version="2.3.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="inception5h.zip">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="labels.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>
