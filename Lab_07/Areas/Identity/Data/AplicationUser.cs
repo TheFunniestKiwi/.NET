@@ -2,7 +2,7 @@
 
 namespace Lab_07.Areas.Identity.Data
 {
-    public class AplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         public long CustomerID { get; set; }
     }
