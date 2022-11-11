@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.Authentication.Basic" Version="6.0.1" />
     <PackageReference Include="DbLite" Version="1.0.26" />
     <PackageReference Include="Hangfire.LiteDB" Version="0.4.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />

@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using AspNetCore.Authentication.Basic;
 using Lab_08.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +7,47 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services
+    .AddAuthentication(BasicDefaults.AuthenticationScheme)
+    .AddBasic(options =>
+    {
+        options.Realm = "Fox API";
+        options.Events = new BasicEvents
+        {
+            OnValidateCredentials = async (context) =>
+            {
+                var user = context.Username;
+                var isValid = user == "user" && context.Password == "password";
+
+                if (isValid)
+                {
+                    context.Response.Headers.Add(
+                        "ValidationCustomHeader",
+                        "From OnValidateCredentials");
+                    var claims = new[]
+                    {
+                        new Claim(
+                            ClaimTypes.NameIdentifier,
+                            context.Username,
+                            ClaimValueTypes.String,
+                            context.Options.ClaimsIssuer),
+                        new Claim(
+                            ClaimTypes.Name,
+                            context.Username,
+                            ClaimValueTypes.String,
+                            context.Options.ClaimsIssuer)
+                    };
+                    context.Principal = new ClaimsPrincipal(new ClaimsIdentity(claims, context.Scheme.Name));
+                    context.Success();
+                }
+                else
+                {
+                    context.NoResult();
+                }
+            }
+        };
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -21,7 +64,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
+
+app.UseFileServer();
 
 app.MapControllers();
 
