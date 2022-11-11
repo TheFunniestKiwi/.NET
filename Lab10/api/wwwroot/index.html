@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        output = document.getElementById('alert');
+        const textarea = document.getElementById('text');
+        function censorText() {
+            output = document.getElementById('alert');
+            const textarea = document.getElementById('text');
+            const uri = `/censor?text=${textarea.value}`;
+            fetch(uri, { method: 'POST' })
+                .then(response => response.text())
+                .then(text => {
+                    output.value = text;
+                });
+        }
+        function call() {
+            text = document.getElementById('text');
+            output = document.getElementById('alert');
+            alert("Andrzej" + text.value);
+            output.value = "Andrzej";
+        }
+    </script>
+</head>
+<body>
+
+<input type="text" id="text"/>
+<button id="clickMe" onclick="censorText()">CENZURA</button><br />
+<textarea id="alert"  disabled="disabled"></textarea>
+</body>
+</html>
